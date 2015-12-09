@@ -1,3 +1,11 @@
 <h1>Titel!</h1>
 
 <p>My name: {{ myName }}</p>
+
+Friends:
+<ul>
+    <template ng-for #person="$implicit" [ng-for-of]="persons" #i="index">
+        <li *ng-if="person.age > 100"><hr></li>
+        <li>{{i}}: {{person.name}} ({{person.age}})</li>
+    </template>
+</ul>
