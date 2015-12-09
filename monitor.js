@@ -8,34 +8,28 @@
             directives: [ng.NgFor, ng.NgIf]
         })
         .Class({
-            constructor: function () {
+            constructor: [MyService, function (myService) {
                 this.myName = "Alice";
-                this.persons = [{
-                    name: 'Peter',
-                    age: 19
-                }, {
-                    name: 'Martin',
-                    age: 23
-                }, {
-                    name: 'Sarah',
-                    age: 32
-                }];
+                this.persons = myService.query(3);
 
-                var persons = this.persons;
-                setInterval(function() {
-                    persons.push({
+                var that = this;
+                setInterval(function () {
+                    that.persons.push({
                         name: 'Seppi',
                         age: 56
                     });
-                },1000);
-                setInterval(function() {
-                    var idx = parseInt(Math.random() * persons.length);
-                    persons[idx].age = persons[idx].age * 2;
-                },1500);
+                }, 1000);
+                setInterval(function () {
+                    var idx = parseInt(Math.random() * that.persons.length);
+                    that.persons[idx].age = that.persons[idx].age * 2;
+                }, 1500);
+            }],
+            getPersonCount: function () {
+                return this.persons.length;
             }
         });
 
     document.addEventListener('DOMContentLoaded', function () {
-        ng.bootstrap(MonitorComponent);
+        ng.bootstrap(MonitorComponent, [MyService]);
     });
 }());
