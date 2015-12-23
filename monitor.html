@@ -2,8 +2,8 @@
 
 Friends ({{getPersonCount()}}):
 <ul>
-    <template ng-for #person="$implicit" [ng-for-of]="persons" #i="index">
-        <li *ng-if="person.age > 100"><hr></li>
+    <template ngFor #person [ngForOf]="persons" #i="index">
+        <li *ngIf="person.age > 100"><hr></li>
         <li>{{i}}: {{person.name}} ({{person.age}})</li>
     </template>
 </ul>
