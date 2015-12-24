@@ -1,9 +1,21 @@
 "use strict";
 
-(function () {
+function createMonitor(tag) {
+
+    var Great = ng.core.Pipe({
+        name: 'great'
+    }).Class({
+        constructor: function () {
+        },
+        transform: function (value) {
+            return value.toUpperCase();
+        }
+    });
+
     var MonitorComponent = ng.core.Component({
-        selector: 'monitor',
-        templateUrl: 'monitor.html'
+        selector: tag,
+        templateUrl: 'monitor.html',
+        pipes: [Great]
     }).Class({
         constructor: [MyService, function (myService) {
             this.myName = "Alice";
@@ -26,7 +38,8 @@
         }
     });
 
+
     document.addEventListener('DOMContentLoaded', function () {
-        ng.platform.browser.bootstrap(MonitorComponent, [MyService]);
+        ng.platform.browser.bootstrap(MonitorComponent, [MyService, Great]);
     });
-}());
+}

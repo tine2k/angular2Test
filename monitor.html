@@ -4,6 +4,6 @@ Friends ({{getPersonCount()}}):
 <ul>
     <template ngFor #person [ngForOf]="persons" #i="index">
         <li *ngIf="person.age > 100"><hr></li>
-        <li>{{i}}: {{person.name}} ({{person.age}})</li>
+        <li>{{i}}: {{person.name | great}} ({{person.age}})</li>
     </template>
 </ul>
