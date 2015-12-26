@@ -1,15 +1,12 @@
 var MyService = function () {
 };
 
-MyService.prototype.query = function (count) {
-    return [{
-        name: 'Peter',
-        age: 19
-    }, {
-        name: 'Martin',
-        age: 23
-    }, {
-        name: 'Sarah',
-        age: 32
-    }];
-}
+MyService.prototype.getPersons = function (callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(JSON.parse(xmlHttp.responseText));
+    }
+    xmlHttp.open("GET", "persons.json", true); // true for asynchronous
+    xmlHttp.send(null);
+};
